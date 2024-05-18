@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.0.0/dist/tf.min.js"></script>
+</head>
+
+<body>
+    <main class="min-h-screen bg-blue-200 flex flex-col space-y-5">
+        <h1 class="font-bold text-center underline text-2xl">Tic Tac Toe</h1>
+
+        <div class="flex flex-col justify-center items-center">
+
+            <div class="flex border-b-2 border-black space-x-10 justify-center px-10">
+                <input type="checkbox" name="checkbox" value="0">
+                <div class="text-black border-l-2 border-black pb-20 "></div>
+                <input type="checkbox" name="checkbox" value="0">
+                <div class="text-black border-l-2 border-black pb-20 "></div>
+                <input type="checkbox" name="checkbox" value="0">
+            </div>
+
+
+
+            <div class="flex border-b-2 border-black space-x-10 px-10">
+                <input type="checkbox" name="checkbox" value="0">
+                <div class="text-black border-l-2 border-black pb-20 "></div>
+                <input type="checkbox" name="checkbox" value="0">
+                <div class="text-black border-l-2 border-black pb-20 "></div>
+                <input type="checkbox" name="checkbox" value="0">
+            </div>
+
+            <div class="flex space-x-10">
+                <input type="checkbox" name="checkbox" value="0">
+                <div class="text-black border-l-2 border-black pb-20 "></div>
+                <input type="checkbox" name="checkbox" value="0">
+                <div class="text-black border-l-2 border-black pb-20 "></div>
+                <input type="checkbox" name="checkbox" value="0">
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center">
+            <button
+                class="p-1 rounded-md border-2 border-white bg-green-500 text-white hover:bg-green-700 hover:scale-110 transition-all font-semibold">Turno
+                de la IA</button>
+        </div>
+
+        <div class="flex justify-center items-center">
+            <p class="text-green-500 text-center font-semibold bg-gray-600 rounded w-fit border-white border-2 p-2">
+                ¡El ganador es: </p>
+        </div>
+    </main>
+
+    <script>
+        // Función para inicializar el array bidimensional
+        function initializeArray() {
+            let array = [];
+            for (let i = 0; i < 3; i++) {
+                array.push([]);
+                for (let j = 0; j < 3; j++) {
+                    array[i].push(0);
+                }
+            }
+            return array;
+        }
+
+        // Función para actualizar el array cuando se hace clic en un checkbox
+        function updateArray() {
+            let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let array = initializeArray();
+            checkboxes.forEach((checkbox, index) => {
+                checkbox.addEventListener('change', () => {
+                    let row = Math.floor(index / 3);
+                    let col = index % 3;
+                    array[row][col] = checkbox.checked ? 1 : 0;
+                    console.log(array); // Imprime el array actualizado en la consola
+                    if (checkbox.checked && checkbox.value === '1') {
+                        checkbox.classList.add('bg-red-500');
+                    } else {
+                        checkbox.classList.remove('bg-red-500');
+                    }
+                });
+            });
+        }
+
+        // Llama a la función para inicializar y actualizar el array cuando se carga la página
+        window.onload = function () {
+            updateArray();
+        };
+    </script>
+</body>
+
+</html>
